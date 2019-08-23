@@ -14,7 +14,11 @@ class App extends React.Component {
       }
     });
 
-    this.setState({ videos: response.data.items });
+    const videoItems = response.data.items.filter((video) => {
+      return video.id.kind === "youtube#video";
+    });
+
+    this.setState({ videos: videoItems, selectedVideo: null });
   };
 
   onVideoSelect = (video) => {
